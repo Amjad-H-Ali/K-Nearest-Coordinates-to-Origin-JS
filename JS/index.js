@@ -30,6 +30,7 @@ const nearestCoordinates = (pointsArray, k) => {
 	// Call maxHeap for each parent node in k size array
 	for(let i = (k/2) - 1; i >= 0; i --) 
 		maxHeap(pointsArray, i, k)
+
 	// Once k portion is in max heap, iterate through rest of array and check if there is a coordinate with a smaller
 	// relative distance than the root node. If there is, swap the elements and rearrange k portion into a max heap.
 	// Relative distance of a coordinate is A squared + B squared.
@@ -40,5 +41,7 @@ const nearestCoordinates = (pointsArray, k) => {
 			maxHeap(pointsArray, 0, k);
 		}
 	}
-	
+
+	// Print k portion of array
+	console.log(pointsArray.splice(0, k));
 }
