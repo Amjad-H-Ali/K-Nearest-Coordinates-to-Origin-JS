@@ -22,4 +22,12 @@ const randomCoordinatesArray = (size) => {
 	return array;
 }
 
-console.log(randomCoordinatesArray(5));
+const coordinates = randomCoordinatesArray(10);
+
+// Function that finds K coordinates nearest to the origin (0, 0) on a Cartesian plane.
+const nearestCoordinates = (pointsArray, k) => {
+	// Call maxHeap for each parent node in k size array
+	for(let indx = (k/2) - 1; i >= 0; i --) 
+		maxHeap(pointsArray, i, k)
+	
+}
