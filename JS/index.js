@@ -43,5 +43,41 @@ const nearestCoordinates = (pointsArray, k) => {
 	}
 
 	// Print k portion of array
-	console.log(pointsArray.splice(0, k));
+	console.log(`Coordinates: ${pointsArray}`)
+	console.log(`Nearest ones: ${pointsArray.splice(0, k)}`);
 }
+
+// Function arranges an array into a max-heap based on relative distance
+const maxHeap = (pointsArray, indx, size) => {
+
+	let largest = indx;
+
+	const left  = (indx * 2) + 1,
+		  right	= left + 1;
+
+	// Comparing the relative distances of the coordinates which is A squared + B squared.
+	if(left < size && pointsArray[left].x**2 + pointsArray[left].y**2 > pointsArray[largest].x**2 + pointsArray[largest].y**2)
+
+		largest = left;
+
+	if(left < size && pointsArray[right].x**2 + pointsArray[right].y**2 > pointsArray[largest].x**2 + pointsArray[largest].y**2)
+
+		largest = left;
+
+	if(largest != indx) {
+		swap(pointsArray, indx, largest);
+		maxHeap(pointsArray, largest, size)
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
