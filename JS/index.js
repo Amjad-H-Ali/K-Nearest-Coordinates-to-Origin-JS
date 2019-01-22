@@ -22,19 +22,26 @@ const randomCoordinatesArray = (size) => {
 	return array;
 }
 
-const coordinates = randomCoordinatesArray(10);
+// Swaps elements in array
+const swap = (arr, indx1, indx2) => {
+	const temp = arr[indx1];
+
+	arr[indx1] = arr[indx2];
+
+	arr[indx2] = temp;
+}
 
 // Function that finds K coordinates nearest to the origin (0, 0) on a Cartesian plane.
 const nearestCoordinates = (pointsArray, k) => {
 
 	// Call maxHeap for each parent node in k size array
-	for(let i = (k/2) - 1; i >= 0; i --) 
+	for(let i = Math.floor(k/2) - 1; i >= 0; i --) 
 		maxHeap(pointsArray, i, k)
 
 	// Once k portion is in max heap, iterate through rest of array and check if there is a coordinate with a smaller
 	// relative distance than the root node. If there is, swap the elements and rearrange k portion into a max heap.
 	// Relative distance of a coordinate is A squared + B squared.
-	for(let i = k; i < array.length; i ++){
+	for(let i = k; i < pointsArray.length; i ++){
 
 		if(pointsArray[i].x**2 + pointsArray[i].y**2 < pointsArray[0].x**2 + pointsArray[0].y**2){
 			swap(pointsArray, i, 0);
@@ -43,8 +50,8 @@ const nearestCoordinates = (pointsArray, k) => {
 	}
 
 	// Print k portion of array
-	console.log(`Coordinates: ${pointsArray}`)
-	console.log(`Nearest ones: ${pointsArray.splice(0, k)}`);
+	
+	console.log("Nearest ones: ", pointsArray.slice(0, k));
 }
 
 // Function arranges an array into a max-heap based on relative distance
@@ -60,9 +67,9 @@ const maxHeap = (pointsArray, indx, size) => {
 
 		largest = left;
 
-	if(left < size && pointsArray[right].x**2 + pointsArray[right].y**2 > pointsArray[largest].x**2 + pointsArray[largest].y**2)
+	if(right < size && pointsArray[right].x**2 + pointsArray[right].y**2 > pointsArray[largest].x**2 + pointsArray[largest].y**2)
 
-		largest = left;
+		largest = right;
 
 	if(largest != indx) {
 		swap(pointsArray, indx, largest);
@@ -71,6 +78,11 @@ const maxHeap = (pointsArray, indx, size) => {
 }
 
 
+const coordinates = randomCoordinatesArray(10);
+
+console.log("Coordinates: ", coordinates);
+
+nearestCoordinates(coordinates, 3);
 
 
 
